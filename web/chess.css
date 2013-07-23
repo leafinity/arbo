@@ -1,25 +1,34 @@
-#ch_child{
+.ch_child{
   width: 70px;
   height: 70px;
-  border-right: 3px solid #757545;
-  border-bottom: 3px solid #757545;
-  border-top: 2px solid #ffffff;
-  border-left: 2px solid #ffffff;
+  border-right: 1px solid rgb(182,164,106);
+  border-bottom: 1px solid rgb(182,164,106);
   position: absolute;
 }
 
-#boardtop{
+.boardtop{
   position: absolute;
+  height: 71px;
+  border-top: 1px solid rgb(182,164,106);
 }
 
-#boardleft{
+.boardleft{
   position: absolute;
+  border-left: 1px solid rgb(182,164,106);
+  width: 71px;
 }
 
-#bc{
-  position: absolute;
+.bc{
+  
+  -webkit-border-radius: 999px;
+  -moz-border-radius: 999px;
+  border-radius: 999px;
+  behavior: url(PIE.htc);
 }
 
-#wc{
-  position: absolute;
+.wc{
+  -webkit-border-radius: 999px;
+  -moz-border-radius: 999px;
+  border-radius: 999px;
+  behavior: url(PIE.htc);
 }

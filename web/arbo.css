@@ -1,4 +1,8 @@
-#chessboard {
+body{
+
+}
+
+.chessboard {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -11,32 +15,32 @@
   user-select: none;
   top: 100px;
   left: 60px;
-  background-color: rgb(230,210,140);
-  width: 560px;
-  height: 560px;
+  background-color: rgb(248,246,184);
+  width: 561px;
+  height: 561px;
 }
 
-#grade_b{
+.grade_b{
   position: absolute;
 
 }
-#grade_b bc{
+.grade_b bc{
   position: absolute;
 
 }
-#score_b{
+.score_b{
   position: absolute;
 
 }
-#grade_w{
+.grade_w{
   position: absolute;
 
 }
-#grade_w wc{
+.grade_w wc{
   position: absolute;
 
 }
-#score_w{
+.score_w{
   position: absolute;
 
 }
