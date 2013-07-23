@@ -1,0 +1,25 @@
+#ch_child{
+  width: 70px;
+  height: 70px;
+  border-right: 3px solid #757545;
+  border-bottom: 3px solid #757545;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  position: absolute;
+}
+
+#boardtop{
+  position: absolute;
+}
+
+#boardleft{
+  position: absolute;
+}
+
+#bc{
+  position: absolute;
+}
+
+#wc{
+  position: absolute;
+}
