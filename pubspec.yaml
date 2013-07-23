@@ -1,0 +1,6 @@
+name: arbo
+version: 0.1.0
+author: Abby Yeh
+description: Arbo
+dependencies:
+  browser: any
