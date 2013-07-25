@@ -82,10 +82,10 @@ void setChess(int x, int y, int color){
 			continue;
 		reverse(i, x, y, color);
 	}
-	int blackscore = 0;
-	int whitescore = 0;
 	int num_can_set = 0;
 	int num_unset = 0;
+  blackscore = 0;
+  whitescore = 0;
 	DivElement can_set;
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++){
@@ -109,18 +109,9 @@ void setChess(int x, int y, int color){
 	}
 	black_score.text = ("$blackscore");
 	white_score.text = ("$whitescore");	
-	if(num_unset == 0){
-	  ButtonElement restart = query('.win');
-	  restart.classes.add('restart');
-		if (blackscore > whitescore) winMemo(BLACK);
-		else if (blackscore == WHITE) writeMemo("Duce. Let's play again");
-		else winMemo(WHITE);		
-		restart.onClick.listen((MouseEvent evt){
-			winTimer.cancel();
-			restart.remove();
-			writeMemo("Please push F5");
-		});
-	} else if(num_can_set == 0) {
+	if(num_unset == 0)
+    endGame();
+  else if(num_can_set == 0) {
 		num_can_set = 0;
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++){
@@ -140,21 +131,32 @@ void setChess(int x, int y, int color){
 		}
 		if(num_can_set == 0) {
 			writeMemo("No one can set chess.");
-			memo.nodes.add(new Element.html('<div class = "win">Restart</div>'));
-			blackscore > whitescore? winMemo(BLACK): blackscore == WHITE ? writeMemo(''): winMemo(WHITE);
-			DivElement restart = query('.win');
-			restart.onClick.listen((MouseEvent evt){
-				winTimer.cancel();
-				restart.remove();
-				writeMemo("Please push F5");
-			});
+      endGame();
 		} else{
 			writeMemo("${color == BLACK? 'White': 'Black'} cannot set any chess.\n${color == BLACK? 'Black': 'White'}'s turn");
-			times++;
+			if(blackscore == 0 || whitescore == 0)
+        endGame();
+      times++;
 		}
 	} else{
 		writeMemo("${color == BLACK? 'White': 'Black'}'s turn");
 	}	
+}
+
+int blackscore, whitescore;
+
+void endGame(){
+    ButtonElement restart = query('.win');
+    restart.classes.add('restart');
+    if (blackscore > whitescore) winMemo(BLACK);
+    else if (blackscore == WHITE) writeMemo("Duce. Let's play again");
+    else winMemo(WHITE);    
+    restart.onClick.listen((MouseEvent evt){
+      winTimer.cancel();
+      restart.remove();
+      writeMemo("Please push F5");
+    });
+
 }
 void reverse(int direction, int x, int y, int color){
 	if(direction == UP){
