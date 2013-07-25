@@ -221,7 +221,6 @@ header{
   font-size: 20px;
   font-family: "Kozuka Gothic Pro EL", sans-serif;
   color: white;  
-  z-index: 2;
   display: none;
 }
 .restart {
@@ -259,4 +258,28 @@ header{
   -moz-border-radius-bottomright: 10px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+.copyright {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  height: 50px;
+  top:735px;
+  left: 0;
+  width: 100%;
+  padding: 20px 0 0;
+  margin: 0;
+  background-color: white;
+  position: absolute;
+  font-family: "Kozuka Gothic Pro EL", sans-serif;
+  font-size: 10px;
+  text-align: center;
+  -webkit-box-shadow: -4px 0 0 rgba(0,0,0,0.6);
+  box-shadow: -4px 0 0rgba(0,0,0,0.6);
+  z-index: 2;
 }
