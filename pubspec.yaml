@@ -1,6 +1,6 @@
-name: arbo
+name: Arbo
 version: 0.1.0
-author: Abby Yeh
+author: Abby
 description: Arbo
 dependencies:
   browser: any

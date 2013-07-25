@@ -1,34 +1,46 @@
 .ch_child{
   width: 70px;
   height: 70px;
-  border-right: 1px solid rgb(182,164,106);
-  border-bottom: 1px solid rgb(182,164,106);
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
   position: absolute;
+  padding: 7px 6px 7px 7px;
+}
+
+.can_set:hover {
+	background-color: #e04761;
+	-webkit-animation: glow 3000ms ease-in infinite alternate;
+  transition: background 0.4s ease;
+  -moz-transition: background 0.4s ease;
+  -webkit-transition: background 0.4s ease;
 }
 
 .boardtop{
   position: absolute;
   height: 71px;
-  border-top: 1px solid rgb(182,164,106);
+  border-top: 1px solid white;
 }
 
 .boardleft{
   position: absolute;
-  border-left: 1px solid rgb(182,164,106);
+  border-left: 1px solid white;
   width: 71px;
 }
 
 .bc{
-  
-  -webkit-border-radius: 999px;
-  -moz-border-radius: 999px;
-  border-radius: 999px;
-  behavior: url(PIE.htc);
+    width: 56px;
+    height: 56px; 
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
+    background-color: black;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.5);
+}
+.wc{
+  width: 56px;
+    height: 56px; 
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
+    background-color: white;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.5);
 }
 
-.wc{
-  -webkit-border-radius: 999px;
-  -moz-border-radius: 999px;
-  border-radius: 999px;
-  behavior: url(PIE.htc);
-}

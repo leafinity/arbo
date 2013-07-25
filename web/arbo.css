@@ -1,46 +1,262 @@
 body{
-
+  background-color: white;
+  width: 100%;
 }
-
-.chessboard {
+.chessboard, .chessboard div, .scoreboard, header {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
-  position: absolute;
   margin: 0;
+  position: absolute;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  top: 100px;
-  left: 60px;
-  background-color: rgb(248,246,184);
-  width: 561px;
-  height: 561px;
+}
+
+header{
+  background-color: white;
+  padding: 15px 200px 20px;
+  margin: 0px;
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  left: 0;
+  top: 0;
+  width: 100%;
+  text-align: left;
+  font-size: 40px;
+  font-family: "Hobo Std", sans-serif;
+  color: black;
+  z-index: 1;
+}
+.arbo{
+  background-color: rgba(255,0,102,1);
+  margin: 0px; padding: 0px;
+  height: 735px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0px;
+}
+  
+.chessboard {
+  left: 247px;
+  top: 127px;
+  background-color: #ffa3a3;
+  width: 567px;
+  height: 567px;
+  border:3px inset rgba(0,0,0,0.2);
 }
 
 .grade_b{
   position: absolute;
-
-}
-.grade_b bc{
-  position: absolute;
-
-}
-.score_b{
-  position: absolute;
+  background-color: #ffa3a3;
+  left: 950px;
+  top: 170px;
+  width: 111px;
+  height: 48px;
+  height: 48px;-webkit-border-top-left-radius: 35px;
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-topleft: 35px;
+  -moz-border-radius-bottomleft: 3px;
+  border-top-left-radius: 35px;
+  border-bottom-left-radius: 3px;
+  padding-top: 7px;
+  padding-bottom: 0;
+  padding-left: 12px;
+  padding-right: 0;
 
 }
 .grade_w{
   position: absolute;
+  background-color: #ffa3a3;
+  left: 950px;
+  top: 255px;
+  width: 111px;
+  height: 48px;-webkit-border-top-left-radius: 35px;
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-topleft: 35px;
+  -moz-border-radius-bottomleft: 3px;
+  border-top-left-radius: 35px;
+  border-bottom-left-radius: 3px;
+  padding-top: 7px;
+  padding-bottom: 0;
+  padding-left: 12px;
+  padding-right: 0;
 
 }
-.grade_w wc{
+
+.score_b{
   position: absolute;
+  background-color: white;
+  left: 1078px;
+  top: 170px;
+  width: 105px;
+  height: 55px;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 35px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 35px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 35px;
+  color: black;
+  font-size: 45px;
+  font-family: "Berlin Sans FB", "Calibri ", sans-serif;
+  text-align: right;
+  padding-right: 15px;
 
 }
 .score_w{
   position: absolute;
+  background-color: white;
+  top: 255px;
+  left: 1078px;
+  width: 105px;
+  height: 55px;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 35px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 35px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 35px;
+  color: black;
+  font-size: 45px;
+  font-family: "Berlin Sans FB", "Calibri ", sans-serif;
+  text-align: right;
+  padding-right: 15px;
+}
 
+.grade_b > div{
+    width: 40px;
+    height: 40px; 
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    background-color: black;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5)
+}
+.grade_w > div{
+	width: 40px;
+    height: 40px; 
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    background-color: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5)
+}
+
+.memo_top{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  position: absolute;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  left: 950px;
+  top: 400px;
+  height: 40px;
+  width: 250px;
+  padding-left:15px;
+  text-align: left;
+  font-size: 30px;
+  font-family: "Kozuka Gothic Pro EL", sans-serif;
+  background-color: white;
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.memo_bottom{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  position: absolute;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  left: 950px;
+  top: 438px;
+  height: 242px;
+  width: 250px;
+  border-top: 2px dashed black;
+  text-align: left;
+  font-size: 33px;
+  font-family: "Calibri", sans-serif;
+  background-color: white;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  -moz-border-radius-bottomright: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.win {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  position: absolute;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  left: 10px;
+  top: 200px;
+  height: 30px;
+  width: 230px;
+  border-radius: 5px;
+  border: 3px outset ragb(0, 0, 0, 0.5); 
+  background-color: #f53b5a;
+  text-align: center;
+  font-size: 20px;
+  font-family: "Kozuka Gothic Pro EL", sans-serif;
+  color: white;  
+  z-index: 2;
+  display: none;
+}
+.restart {
+  display: block;
+}
+.win:hover {
+  background-color: #f55c75;
+  transition: background 0.4s ease;
+  -moz-transition: background 0.4s ease;
+  -webkit-transition: background 0.4s ease;
+}
+#memo {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  position: absolute;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  left: 950px;
+  top: 438px;
+  height: 200px;
+  width: 250px;
+  padding-top: 5px;
+  padding-left:20px;
+  text-align: left;
+  font-size: 30px;
+  font-family: "Calibri", sans-serif;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  -moz-border-radius-bottomright: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
