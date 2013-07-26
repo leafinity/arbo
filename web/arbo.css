@@ -19,8 +19,8 @@ header{
   background-color: white;
   padding: 15px 200px 20px;
   margin: 0px;
-  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   left: 0;
   top: 0;
   width: 100%;
@@ -279,7 +279,7 @@ header{
   font-family: "Kozuka Gothic Pro EL", sans-serif;
   font-size: 10px;
   text-align: center;
-  -webkit-box-shadow: -4px 0 0 rgba(0,0,0,0.6);
-  box-shadow: -4px 0 0rgba(0,0,0,0.6);
+  -webkit-box-shadow: 0 -4px 15px rgba(0,0,0,0.4);
+  box-shadow: 0 -4px 15px rgba(0,0,0,0.4);
   z-index: 2;
 }
