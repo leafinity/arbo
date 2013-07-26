@@ -44,9 +44,9 @@ header{
   left: 247px;
   top: 127px;
   background-color: #ffa3a3;
-  width: 567px;
-  height: 567px;
-  border:3px inset rgba(0,0,0,0.2);
+  width: 566px;
+  height: 566px;
+  border:3px inset #b51c4f;
 }
 
 .grade_b{
