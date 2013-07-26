@@ -10,13 +10,13 @@
   <body>   
     <header>Arbo's Reversi</header>
     <div class = "arbo">
-      <div class = "chessboard"></div>
-      <div class = "grade_b"><div></div></div> <div class = "score_b"></div>
-      <div class = "grade_w"><div></div></div> <div class = "score_w"></div>
-      <div class = "memo_top">memo</div><div class = "memo_bottom"><button class = "win">Restart</button></div>
+      <div class = "chessboard" id = "chessboard"></div>
+      <div class = "grade_b"><div></div></div> <div class = "score_b" id = "score_b"></div>
+      <div class = "grade_w"><div></div></div> <div class = "score_w" id = "score_w"></div>
+      <div class = "memo_top">Hello!</div><div class = "memo_bottom"><button class = "win" id = "restart">Restart</button></div>
       <div id = "memo"></div>
     </div>
-    <div class="copyright">Copyright &copy 2013 Leafinity</div>
+    <div class="copyright">Copyright &copy; 2013 Leafinity</div>
     
     <script type="application/dart" src="arbo.dart"></script>
     <!-- for this next line to work, your pubspec.yaml file must have a dependency on 'browser' -->
