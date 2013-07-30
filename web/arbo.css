@@ -1,4 +1,4 @@
-body{
+body {
   background-color: white;
   width: 100%;
 }
@@ -15,7 +15,8 @@ body{
   user-select: none;
 }
 
-header{
+header {
+  height: 92px;
   background-color: white;
   padding: 15px 200px 20px;
   margin: 0px;
@@ -30,7 +31,7 @@ header{
   color: black;
   z-index: 1;
 }
-.arbo{
+.arbo {
   background-color: rgba(255,0,102,1);
   margin: 0px; padding: 0px;
   height: 735px;
@@ -49,7 +50,7 @@ header{
   border:3px inset #b51c4f;
 }
 
-.grade_b{
+.grade_b {
   position: absolute;
   background-color: #ffa3a3;
   left: 950px;
@@ -68,7 +69,7 @@ header{
   padding-right: 0;
 
 }
-.grade_w{
+.grade_w {
   position: absolute;
   background-color: #ffa3a3;
   left: 950px;
@@ -87,7 +88,7 @@ header{
 
 }
 
-.score_b{
+.score_b {
   position: absolute;
   background-color: white;
   left: 1078px;
@@ -107,7 +108,7 @@ header{
   padding-right: 15px;
 
 }
-.score_w{
+.score_w {
   position: absolute;
   background-color: white;
   top: 255px;
@@ -127,7 +128,7 @@ header{
   padding-right: 15px;
 }
 
-.grade_b > div{
+.grade_b > div {
     width: 40px;
     height: 40px; 
     -webkit-border-radius: 20px;
@@ -135,7 +136,7 @@ header{
     background-color: black;
     box-shadow: 0 1px 2px rgba(0,0,0,0.5)
 }
-.grade_w > div{
+.grade_w > div {
 	width: 40px;
     height: 40px; 
     -webkit-border-radius: 20px;
@@ -144,7 +145,7 @@ header{
     box-shadow: 0 1px 2px rgba(0,0,0,0.5)
 }
 
-.memo_top{
+#memo, .copyright, .win, .memo_top, .memo_bottom, .shield, .playerchoice, .playerchoice div, .sbCannotChess, .arboPatch {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -155,6 +156,9 @@ header{
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.memo_top {
   left: 950px;
   top: 400px;
   height: 40px;
@@ -172,17 +176,7 @@ header{
   border-top-right-radius: 10px;
 }
 
-.memo_bottom{
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  margin: 0;
-  position: absolute;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+.memo_bottom {
   left: 950px;
   top: 438px;
   height: 242px;
@@ -200,16 +194,6 @@ header{
   border-bottom-right-radius: 10px;
 }
 .win {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  margin: 0;
-  position: absolute;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   left: 10px;
   top: 200px;
   height: 30px;
@@ -232,17 +216,8 @@ header{
   -moz-transition: background 0.2s ease;
   -webkit-transition: background 0.2s ease;
 }
+
 #memo {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  margin: 0;
-  position: absolute;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   left: 950px;
   top: 438px;
   height: 200px;
@@ -260,26 +235,152 @@ header{
   border-bottom-right-radius: 10px;
 }
 .copyright {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   height: 50px;
   top:735px;
   left: 0;
   width: 100%;
   padding: 20px 0 0;
-  margin: 0;
   background-color: white;
   position: absolute;
   font-family: "Kozuka Gothic Pro EL", sans-serif;
   font-size: 10px;
   text-align: center;
-  -webkit-box-shadow: 0 -4px 15px rgba(0,0,0,0.4);
-  box-shadow: 0 -4px 15px rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0 -4px 4px rgba(0,0,0,0.4);
+  box-shadow: 0 -4px 4px rgba(0,0,0,0.4);
   z-index: 2;
+}
+.shield{
+  padding: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 785px;
+  background-color: rgba(10,0,0,0.3); 
+}
+.playerchoice{
+  top: 227px;
+  left: 510px;
+  width: 500px;
+  height: 200px;
+  font-size: 40px;
+  font-family: "Gulim", sans-serif;
+  text-align: left;
+  background-color: white;
+  -webkit-box-shadow: 4px 5px 24px rgba(50, 50, 50, 1);
+  -moz-box-shadow:    4px 5px 24px rgba(50, 50, 50, 1);
+  box-shadow:         4px 5px 24px rgba(50, 50, 50, 1);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+
+}
+
+.playerchoice1 {
+  top: 20px;
+  left: 30px;
+  width: 440px;
+  height: 70px;
+  padding-top: 7px;
+  padding-left: 80px;
+  border: 2px dashed #f55c75;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.playerchoice2 {
+  top: 110px;
+  left: 30px;
+  width: 440px;
+  height: 70px;
+  padding-top: 7px;
+  padding-left: 80px;
+  border: 2px dashed #f55c75;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.p1s{
+  top: 0;
+  left: 0;
+  height: 100px;
+  width: 500px;
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.p2s{
+  top: 100px;
+  left: 0;
+  height: 100px;
+  width: 500px;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  -moz-border-radius-bottomright: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.p1s:hover{
+  background-color: rgba(255,0,102,0.1);
+  transition: background 0.4s ease;
+  -moz-transition: background 0.4s ease;
+  -webkit-transition: background 0.4s ease;
+}
+.p2s:hover {
+  background-color: rgba(255,0,102,0.1);
+  transition: background 0.4s ease;
+  -moz-transition: background 0.4s ease;
+  -webkit-transition: background 0.4s ease;
+}
+
+.disappear {
+  display: none;
+}
+
+.sbCannotChess {
+  top: 40px;
+  left: 413px;
+  width: 230px;
+  height: 85px;
+  background-color: rgba(255, 215, 210, 0.8);
+  border: 1px solid white;
+  border-top: 0px solid white;
+  -webkit-border-bottom-left-radius: 7px;
+  -webkit-border-bottom-right-radius: 7px;
+  -moz-border-radius-bottomleft: 7px;
+  -moz-border-radius-bottomright: 7px;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  -webkit-box-shadow: 0px 2px 7px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    0px 2px 7px rgba(50, 50, 50, 0.75);
+  box-shadow:         0px 2px 7px rgba(50, 50, 50, 0.75);
+  padding-top: 15px;
+  color: white;
+  font-size: 20px;
+  font-family: "", sans-serif; 
+  text-align: center;
+  transition: top 0.8s ease;
+  -moz-transition: top 0.8s ease;
+  -webkit-transition: top 0.8s ease;
+}
+.sbCannotChess_state2{
+  top: 130px;
+  transition: top 0.8s ease;
+  -moz-transition: top 0.8s ease;
+  -webkit-transition: top 0.8s ease;
+
+}
+.arboPatch{
+  top: 90px;
+  left: 400px;
+  height: 40px;
+  width: 260px;
+  background-color: rgba(255,0,102,1);
+  border-bottom: 3px solid #550030; 
+  display: block;
 }

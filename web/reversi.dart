@@ -5,6 +5,7 @@ import "dart:html";
 import "dart:async";
 
 part "reversi_util.dart";
+part "visualboard.dart";
 
 class Offset {
   int x, y;
@@ -42,6 +43,11 @@ class Board {
   }
   Board.from(Board board) {
     _init();
+    for (int i = 0; i < 8; i++) {
+      for (int j = 0; j < 8; j++) {
+        _board[i][j] = board._board[i][j];
+      }
+    }
   }
   void _init() {
     _board = new List(8);
@@ -93,132 +99,17 @@ class Board {
   }
 }
 
-///The visual-able board shown on the screen.
-class VisualBoard extends Board {
-  final Element _parent;
-  final List<List<DivElement>> _cells = new List(8);
-  final Dialog _dialog;
-  final ScoreBoard _scoreboard;
-  int _times = 0;
-
-  VisualBoard(this._parent, this._dialog, this._scoreboard) {
-    _initElements();
-    _initEvents();
-    _dialog.write("Black first");
-    _scoreboard.setScore(_board);    
-  }
-  void _initElements() {
-    for (int i = 0; i < 8; i++) {
-      _cells[i] = new List(8);
-      String ver = i == 0? "boardleft" : "";
-      int left = i == 0? 0: ((i-1) * 70 + 71);
-      for (int j = 0; j < 8; j++) {
-        String horz = j == 0? "boardtop" : "";
-        int top = j == 0? 0: ((j-1) * 70 + 71);
-        _parent.nodes.add(
-          _cells[i][j] = new Element.html('<div class = "ch_child $horz $ver" style = "left : ${left}px; top : ${top}px;"></div>'));
-      }
-    }
-    _placeOne(new Offset(3, 3), BLACK);
-    _placeOne(new Offset(4, 4), BLACK);
-    _placeOne(new Offset(3, 4), WHITE);
-    _placeOne(new Offset(4, 3), WHITE);
-
-    int a = _updateHints(BLACK);
-  }
-  void _initEvents(){
-    _parent.onClick.listen(( MouseEvent evt){
-      Offset pos = new Offset(
-        (((evt.page.x - _parent.offsetLeft) / 70).toInt()),
-          (((evt.page.y - _parent.offsetTop) / 70).toInt())
-      );
-      print("pos: $pos");
-      Color current_color = _times % 2 == 0? BLACK: WHITE;
-      Color next_color = _times % 2 == 0? WHITE: BLACK;
-      if (canPlace(pos, current_color)){
-        placeChess(pos, current_color);
-        _times++;
-        _dialog.write("${next_color}'s turn");
-        int a = _updateHints(next_color);
-        _scoreboard.setScore(_board);
-        if(_scoreboard._blackscore == 0 || _scoreboard._whitescore == 0 
-          || _scoreboard._blackscore + _scoreboard._whitescore == 64)
-          _EndGame();
-        else if(a == 0){
-          a =  _updateHints(current_color);
-          if(a == 0){
-            _dialog.write('No one can place chess');
-            _EndGame();
-          }
-          else{
-            _dialog.write("$next_color cannot place chess. ${current_color}'s turn");
-            _times++;
-          }
-        }
-      }
-    });
-  }
-  DivElement _cell(Offset pos)
-  => _cells[pos.x][pos.y];
-
-  int _updateHints(Color color) {
-    int num_can_set = 0;
-    for (int i = 0; i < 8; i++){
-      for (int j = 0; j < 8; j++){
-        Offset pos = new Offset(i, j);
-        if (canPlace(pos, color)){
-          _cell(pos).classes.add('can_set');
-          num_can_set++;
-        }
-        else
-          _cell(pos).classes.remove('can_set');
-      }
-    }
-    return num_can_set;
-  }
-  void placeChess(Offset pos, Color color) {
-    super.placeChess(pos, color);
-    _placeOne(pos, color);
-  }
-
-  void _placeOne(Offset pos, Color color) {
-    //change the DOM element
-    if (this[pos] == null) {
-      _cell(pos).nodes.add( new Element.html('<div class="${color == BLACK? "b": "w"}c"></div>'));
-      _cell(pos).classes.remove('can_set');
-    } else if (color == BLACK){
-        DivElement chess = _cell(pos).nodes[0];
-        chess.classes.add('bc');
-        chess.classes.remove('wc');
-    } else {
-        DivElement chess = _cell(pos).nodes[0];
-        chess.classes.add('wc');
-        chess.classes.remove('bc');
-    }
-    super._placeOne(pos, color);
-  }
-
-  void _EndGame(){
-    int a = _scoreboard._blackscore - _scoreboard._whitescore;
-    if(a > 0)
-      _dialog.writeWinner(BLACK);
-    else if (a == 0)
-      _dialog.write("Duce. Let's play again");
-    else
-      _dialog.writeWinner(WHITE);
-   ButtonElement restart = query('#restart');
-   restart.classes.add('restart');
-   restart.onClick.listen((MouseEvent evt){
-     _dialog._cancelTimers();
-     _dialog.write("Please push F5");
-     restart.remove();
-   });
-  }
-}
 final List<Offset> _allOfs = [
   new Offset(-1, 0), new Offset(-1, 1), new Offset(0, 1),
   new Offset(1, 1),                     new Offset(1, 0),
   new Offset(1, -1), new Offset(0, -1), new Offset(-1, -1)];
 final List<List<int>> _scores = [
-  [100, -20, 20, 30, 30, 20, -20, 100],
+  [300, -20, 20, 30, 30, 20, -20,100],
+  [-20, -50, 20, 30, 30, 20, -50,-20],
+  [ 20,  20, 40, 20, 20, 40,  20, 20],
+  [ 30,  30, 20,  0,  0, 20,  30, 30],
+  [ 30,  30, 20,  0,  0, 20,  30, 30],
+  [ 20,  20, 40, 20, 20, 40,  20, 20],
+  [-20, -50, 20, 30, 30, 20, -50,-20],
+  [100, -20, 20, 30, 30, 20, -20,300],
 ];
