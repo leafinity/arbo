@@ -16,7 +16,7 @@ class Offset {
     if (other is Offset)
       return x == other.x && y == other.y;
     if (other is List && other.length == 2)
-      return x == other[0] && y == other.y;
+      return x == other[0] && y == other[1];
     return false;
   }
   Offset operator+(Offset offset)
@@ -25,6 +25,7 @@ class Offset {
 
   bool get isInside => x >= 0 && x <= 7 && y >= 0 && y <= 7;
 
+  int get hashCode => x + y;
   String toString() => "($x, $y)";
 }
 
