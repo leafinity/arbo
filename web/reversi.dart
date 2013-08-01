@@ -98,19 +98,44 @@ class Board {
   void operator[]=(Offset pos, Color color) {
     _board[pos.x][pos.y] = color;
   }
+  bool boardFull() {    
+    for (int i = 0; i < 8; i++) {
+      for (int j = 0; j < 8; j++) {
+        if (_board[i][j] == null)
+          return false;
+      }
+    }
+    return true;
+  }
+  void donp() {
+    StringBuffer sb = new StringBuffer();
+    for(int i = 0; i < 8 ; i++) {
+      for(int j = 0; j < 8 ; j++) {
+        if (_board[i][j] == BLACK)
+          sb.write("B");
+        else if (_board[i][j] == WHITE)        
+          sb.write("W");
+        else if (_board[i][j] == null)
+          sb.write("O");
+      }
+      sb.write("\n");
+    }
+    print(sb);
+  }
+  bool aboveConer(int i, int j){
+    if(i == 1 && j == 1)
+      return true;
+    if(i == 6 && j == 6)
+      return true;
+    if(i == 1 && j == 6)
+      return true;
+    if(i == 6 && j == 1)
+      return true;
+    return false;
+  }
 }
 
 final List<Offset> _allOfs = [
   new Offset(-1, 0), new Offset(-1, 1), new Offset(0, 1),
   new Offset(1, 1),                     new Offset(1, 0),
   new Offset(1, -1), new Offset(0, -1), new Offset(-1, -1)];
-final List<List<int>> _scores = [
-  [300, -20, 20, 30, 30, 20, -20,100],
-  [-20, -50, 20, 30, 30, 20, -50,-20],
-  [ 20,  20, 40, 20, 20, 40,  20, 20],
-  [ 30,  30, 20,  0,  0, 20,  30, 30],
-  [ 30,  30, 20,  0,  0, 20,  30, 30],
-  [ 20,  20, 40, 20, 20, 40,  20, 20],
-  [-20, -50, 20, 30, 30, 20, -50,-20],
-  [100, -20, 20, 30, 30, 20, -20,300],
-];

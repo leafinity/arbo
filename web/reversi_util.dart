@@ -52,7 +52,7 @@ class Dialog {
     }
     if (_player == COMPUTER) {
       if(color == BLACK) 
-        write("QAQ You are so barbaric. Don't be so cruel to me. wu~~~");
+        _memo.innerHtml = 'You are so barbaric <img src = "../static/cry.gif" alt = "cry"></img>  Play again! Play again!';
       else if(color == WHITE)
         write('HA!HA!HA! I WIN. Go to pratice more');
     }
@@ -70,47 +70,74 @@ class Dialog {
 }
 
 class ComputerPlayer {
-  Offset nextMove(Board board){
-    int highest = 0;
-    Offset h_pos;
-    int times = 0;
-    for (int i = 0; i < 8; i++) {
-      for (int j = 0; j < 8; j++) {
-        Board temp_b = new Board.from(board);
-        int score = 0;
-        Offset pos = new Offset(i, j);
-        if(temp_b.canPlace(pos, WHITE)) {
-          if(i + j == 1 || (ab(i, j) == 6 && (i + j == 6) || (i + j == 8)) || i + j == 13)
-            score -= 200;
-          temp_b.placeChess(pos, WHITE);
-          for (int k = 0; k < 8; k++) {
-            for (int l = 0; l < 8; l++) {
-              int a = 0;
-              switch(temp_b._board[k][l]){
-                case BLACK:
-                  a = _scores[k][l] * -1;
-                  break;
-                case WHITE:
-                  a = _scores[k][l];
-              }
-              score += a;
-            } // l
-          } // k
-          if (times == 0){
-            highest = score;
-            h_pos = pos;
-            times++;
+  Offset nextMove(Board board, int level){
+    int levelNext = level - 1;
+    int highScore = -10000;
+    Offset pos;
+    for(int i = 0; i < 8 ; i++){
+      for(int j = 0; j < 8 ; j++){
+        Board tempBoard = new Board.from(board);
+        if (tempBoard.canPlace(new Offset(i, j), WHITE)){
+          tempBoard.placeChess(new Offset(i, j), WHITE);
+          int score = getHighScore(tempBoard, BLACK, levelNext);
+          print("$i,$j = $score");
+          if (highScore <= score ){
+            highScore = score;
+            pos = new Offset(i, j);
           }
-          else if(score > highest){
-            highest = score;
-            h_pos = pos;
-          }
-          score = 0;
         }
-      } // j
-    } // i
-    return h_pos;
-  } // function nextMove()
+      }
+    }
+    return pos;
+  } 
+  
+  int getHighScore(Board board, Color color, int level){
+    if(level == 0 || board.boardFull()){
+      return countscore(board);
+    }
+    int levelNext = level - 1;
+    int highScore = -10000;
+    for(int i = 0; i < 8 ; i++){
+      for(int j = 0; j < 8 ; j++){
+        Offset pos = new Offset(i, j);
+        Board tempBoard = new Board.from(board);
+        if (tempBoard.canPlace(pos, color)){
+          tempBoard.placeChess(pos, color);
+          Color another = color == BLACK? WHITE: BLACK;
+          int score = getHighScore(tempBoard, another, levelNext);
+          if(color == BLACK && tempBoard.aboveConer(i, j))
+            score += 500;          
+          else if(color == WHITE && tempBoard.aboveConer(i, j))
+            score -= 500;
+          if (score >= highScore){
+            highScore = score;
+          }
+        }
+      }//j
+    }//i
+    return highScore;
+  }
+  int countscore(Board board){
+    int score = 0;
+    for(int i = 0; i < 8 ; i++){
+      for(int j = 0; j < 8 ; j++){
+        int add;
+        switch(board._board[i][j]){
+          case BLACK:
+            add = _scores[i][j] * (-1);
+            break;
+          case WHITE:
+            add = _scores[i][j];
+            break;
+          default:
+            add = 0;
+            break;
+        }
+        score = score + add;
+      }
+    }
+    return score;
+  }
   int _bScoreOrigin, _wScoreOrigin;
   void computerwrite(Dialog _dialog, Color nextcolor, int bScore, int wScore){
     if(_bScoreOrigin == null || _wScoreOrigin == null){
@@ -131,8 +158,10 @@ class ComputerPlayer {
         _dialog.write("O_Q Please be gentle");
       else if (bDif > 2)
         _dialog.write("Let me think...");
-      else
+      else if (_times >= 5)
         _dialog.write("Stop fooling!");
+      else
+        _dialog.write("It's my turn!");
     } else {
       int wDif = wScore - _wScoreOrigin;
       if(wDif > 15)
@@ -184,9 +213,9 @@ class Alert {
     Timer _altTimer = new Timer.periodic(const Duration(milliseconds: 3500),(Timer timer) {
       if(pastSeconds == 0){
         if(_player == HUMAN)
-          _alt.innerHtml = "<br>${keepPlace == BLACK? 'Black': 'White'}'s turn";
+          _alt.innerHtml = "${keepPlace == BLACK? 'Black': 'White'}'s turn";
         else if(_player == COMPUTER)
-          _alt.innerHtml = "<br>${keepPlace == BLACK? 'Your': 'My'} turn";
+          _alt.innerHtml = "${keepPlace == BLACK? 'Your': 'My'} turn";
         pastSeconds++;
         clickTimes++;
       }
@@ -200,4 +229,13 @@ class Alert {
   }
   
 }
-
+final List<List<int>> _scores = [
+  [900, -20, 20, 30, 30, 20, -20,900],
+  [-20, -50, 20, 30, 30, 20, -50,-20],
+  [ 20,  20, 40, 20, 20, 40,  20, 20],
+  [ 30,  30, 20, 20, 20, 20,  30, 30],
+  [ 30,  30, 20, 20, 20, 20,  30, 30],
+  [ 20,  20, 40, 20, 20, 40,  20, 20],
+  [-20, -50, 20, 30, 30, 20, -50,-20],
+  [900, -20, 20, 30, 30, 20, -20,900],
+];

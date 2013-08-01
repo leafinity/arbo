@@ -1,22 +1,26 @@
 part of reversi;
 
-  int _player;
-  int COMPUTER = 0, HUMAN = 1; 
+int _player;
+int COMPUTER = 0, HUMAN = 1;
+int _times = 0; 
 
 ///The visual-able board shown on the screen.
 class VisualBoard extends Board {
   final Element _parent;
+  DivElement _hint;
   final List<List<DivElement>> _cells = new List(8);
   final Dialog _dialog;
   final ScoreBoard _scoreboard;
   final Alert _alert;
   ComputerPlayer _computer = new ComputerPlayer();
-  int _times = 0; 
   bool _computing = false;
+  int _level;
+  int EASY = 1, MEDIUM = 2, HARD = 4;
 
   VisualBoard(this._parent, this._dialog, this._scoreboard, this._alert) {
     _initElements();
     _choosePlayer();
+    _chooseLevel();
     _initEvents();
     _scoreboard.setScore(_board);    
   }
@@ -39,7 +43,30 @@ class VisualBoard extends Board {
 
     int a = _updateHints(BLACK);
   }
+  void _removeHint(int i, int j){
+    _cells[i][j].classes.remove("hint");
+  }
   void _initEvents(){
+    _hint = query('#hint');
+    if(_hint ==  null)
+      print("where is hint?");
+    _hint.onClick.listen(( MouseEvent evt){ 
+      if(_computing)
+        return;
+      Color currentColor;
+      if(_player == HUMAN)
+        currentColor =  _times % 2 == 0? BLACK: WHITE;
+      else
+        currentColor = BLACK;
+      for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+          if(canPlace(new Offset(i, j), currentColor)){
+            _cells[i][j].classes.add("hint");
+            new Timer(const Duration(seconds: 1), () {_removeHint(i, j);});
+          }
+        }
+      }
+    });
     _parent.onClick.listen(( MouseEvent evt){
       Offset pos = new Offset(
         (((evt.page.x - _parent.offsetLeft) / 70).toInt()),
@@ -87,7 +114,12 @@ class VisualBoard extends Board {
       if (nextColor == WHITE){
         _computing = true;
         _computer.computerwrite(_dialog, WHITE, _scoreboard._blackscore, _scoreboard._whitescore);
-        new Timer(const Duration(milliseconds: 2500), _computerPlace);
+        if (_level == EASY)
+          new Timer(const Duration(milliseconds: 2500), _computerPlace);
+        if (_level == MEDIUM)
+          new Timer(const Duration(milliseconds: 1500), _computerPlace);
+        else
+          new Timer(const Duration(milliseconds: 50), _computerPlace);
       }
       else if(nextColor == null){
         _endGame();
@@ -100,7 +132,7 @@ class VisualBoard extends Board {
     }//if (canPlace(pos, BLACK))
   }
   void _computerPlace(){
-    placeChess(_computer.nextMove(this), WHITE);
+    placeChess(_computer.nextMove(this, _level), WHITE);
     Color nextColor = _updateScore(WHITE);
     if (nextColor != WHITE) {
       _computing = false;
@@ -113,7 +145,12 @@ class VisualBoard extends Board {
     }
     _alert.alertPop(WHITE);
     _dialog.write("Haha~ It's my turn again B-)");
-    new Timer(const Duration(milliseconds: 2500), _computerPlace);
+    if (_level == EASY)
+      new Timer(const Duration(milliseconds: 2200), _computerPlace);      
+    if (_level == MEDIUM)
+      new Timer(const Duration(milliseconds: 1500), _computerPlace);
+    else
+      _computerPlace();
   }
 
   Color _updateScore(Color currentColor) { //cpt : white
@@ -170,48 +207,91 @@ class VisualBoard extends Board {
     if (this[pos] == null) {
       _cell(pos).nodes.add( new Element.html('<div class="${color == BLACK? "b": "w"}c"></div>'));
       _cell(pos).classes.remove('can_set');
+      _cell(pos).classes.add('lastest');
+      //new Timer(const Duration(seconds: 1), () {_removeLastest(pos.x, pos.y);});
     } else if (color == BLACK){
-        DivElement chess = _cell(pos).nodes[0];
-        chess.classes.add('bc');
-        chess.classes.remove('wc');
+      DivElement chess = _cell(pos).nodes[0];
+      chess.classes.add('bc');
+      chess.classes.remove('wc');
     } else {
-        DivElement chess = _cell(pos).nodes[0];
-        chess.classes.add('wc');
-        chess.classes.remove('bc');
+      DivElement chess = _cell(pos).nodes[0];
+      chess.classes.add('wc');
+      chess.classes.remove('bc');
     }
     super._placeOne(pos, color);
+  }
+  void _removeLastest(int i, int j){
+    _cells[i][j].classes.remove('lastest');
   }
   void _choosePlayer(){
     DivElement p1 = query('#oneplayer');
     DivElement p2 = query('#twoplayer');
     p1.onClick.listen(( MouseEvent evt){
       _player = COMPUTER;
-      p1.classes.add('disappear');
-      p2.classes.add('disappear');
-      DivElement dis = query('#bigShield');
-      dis.classes.add('disappear');
-      dis = query('.playerchoice');
-      dis.classes.add('disappear');
-      dis = query('.playerchoice1');
-      dis.classes.add('disappear');
-      dis = query('.playerchoice2');
-      dis.classes.add('disappear');
+      _disChooseBoxP();
+      _chooseLevel();
       _dialog.write('You go first');
     });
     p2.onClick.listen(( MouseEvent evt){
       _player = HUMAN;
-      p1.classes.add('disappear');
-      p2.classes.add('disappear');
-      DivElement dis = query('#bigShield');
-      dis.classes.add('disappear');
-      dis = query('.playerchoice');
-      dis.classes.add('disappear');
-      dis = query('.playerchoice1');
-      dis.classes.add('disappear');
-      dis = query('.playerchoice2');
-      dis.classes.add('disappear');
+      _disChooseBoxP();
       _dialog.write('Black first');
     });
+  }
+  void _disChooseBoxP(){
+    DivElement p1 = query('#oneplayer');
+    DivElement p2 = query('#twoplayer');    
+    p1.classes.add('disappear');
+    p2.classes.add('disappear');
+    DivElement dis = query('.playerchoice');
+    dis.classes.add('disappear');
+    dis = query('.playerchoice1');
+    dis.classes.add('disappear');
+    dis = query('.playerchoice2');
+    dis.classes.add('disappear');
+    if (_player == COMPUTER) {
+      dis = query('.level');
+      dis.classes.remove('disappear');
+    }
+    else{
+      dis = query('#bigShield');
+      dis.classes.add('disappear');
+    }
+  }
+  void _chooseLevel(){
+    DivElement l1 = query('#hard');
+    DivElement l2 = query('#medium');
+    DivElement l3 = query('#easy');
+    l1.onClick.listen(( MouseEvent evt){
+      _level = HARD;
+      _disChooseBoxL();
+    });
+    l2.onClick.listen(( MouseEvent evt){
+      _level = MEDIUM;
+      _disChooseBoxL();
+    });
+    l3.onClick.listen(( MouseEvent evt){
+      _level = EASY;
+      _disChooseBoxL();
+    });
+  }
+  void _disChooseBoxL(){
+    DivElement l1 = query('#hard');
+    DivElement l2 = query('#medium');
+    DivElement l3 = query('#easy');   
+    l1.classes.add('disappear');   
+    l2.classes.add('disappear');   
+    l3.classes.add('disappear');
+    DivElement dis = query('#bigShield');
+    dis.classes.add('disappear');
+    dis = query('.level');
+    dis.classes.add('disappear');
+    dis = query('.level1');
+    dis.classes.add('disappear');
+    dis = query('.level2');
+    dis.classes.add('disappear');    
+    dis = query('.level3');
+    dis.classes.add('disappear');
   }
 
   void _endGame(){
