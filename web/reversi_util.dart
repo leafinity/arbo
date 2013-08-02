@@ -51,6 +51,7 @@ class Dialog {
       });
     }
     if (_player == COMPUTER) {
+      _cancelTimers();
       if(color == BLACK) 
         _memo.innerHtml = 'You are so barbaric <img src = "static/cry.gif" alt = "cry"></img>  Play again! Play again!';
       else if(color == WHITE)
@@ -73,7 +74,7 @@ class ComputerPlayer {
   Offset nextMove(Board board, int level){
     _d1 = new DateTime.now();
     int levelNext = level - 1;
-    int highScore = -100000000;
+    int highScore;
     Offset pos;
     for(int i = 0; i < 8 ; i++){
       for(int j = 0; j < 8 ; j++){
@@ -82,7 +83,7 @@ class ComputerPlayer {
           tempBoard.placeChess(new Offset(i, j), WHITE);
           int score = getHighScore(tempBoard, BLACK, levelNext);
           //print("$i,$j = $score");
-          if (highScore < score ){
+          if (highScore == null || highScore < score ){
             highScore = score;
             pos = new Offset(i, j);
           }
@@ -99,8 +100,7 @@ class ComputerPlayer {
       return countscore(board);
     }
     int levelNext = level - 1;
-    int highScore = -100000000;
-    if (color == BLACK) highScore = -highScore;
+    int highScore;
     for(int i = 0; i < 8 ; i++){
       for(int j = 0; j < 8 ; j++){
         Offset pos = new Offset(i, j);
@@ -112,18 +112,18 @@ class ComputerPlayer {
           if (color == BLACK) {
             if(tempBoard.aboveConer(i, j))
               score += 500;          
-            if (score < highScore)
+            if (highScore == null || score < highScore)
               highScore = score;
           } else {
             if (tempBoard.aboveConer(i, j))
               score -= 500;
-            if (score > highScore)
+            if (highScore == null || score > highScore)
               highScore = score;
           }
         }
       }//j
     }//i
-    return highScore;
+    return highScore != null ? highScore: 0; //stupid, but...
   }
   int countscore(Board board){
     int score = 0;
@@ -238,12 +238,12 @@ class Alert {
   
 }
 final List<List<int>> _scores = [
-  [900, -20, 20, 30, 30, 20, -20,900],
-  [-20, -50, 20, 30, 30, 20, -50,-20],
-  [ 20,  20, 40, 20, 20, 40,  20, 20],
-  [ 30,  30, 20, 20, 20, 20,  30, 30],
-  [ 30,  30, 20, 20, 20, 20,  30, 30],
-  [ 20,  20, 40, 20, 20, 40,  20, 20],
-  [-20, -50, 20, 30, 30, 20, -50,-20],
-  [900, -20, 20, 30, 30, 20, -20,900],
+  [900, -10, 90, 50, 50, 90, -10,900],
+  [-10,-250, 10, 20, 20, 10,-250,-10],
+  [ 90,  10, 50, 30, 30, 50,  10, 90],
+  [ 50,  20, 30, 20, 20, 30,  20, 50],
+  [ 50,  20, 30, 20, 20, 30,  20, 50],
+  [ 90,  10, 50, 30, 30, 50,  10, 90],
+  [-10,-250, 10, 20, 20, 10,-250,-10],
+  [900, -10, 90, 50, 50, 90, -10,900],
 ];
