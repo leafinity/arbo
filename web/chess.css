@@ -38,25 +38,18 @@
 }
 
 .lastest {
-  animation: popChess 0.5s;
-  animation-delay: 0.25s;
-  animation-iteration-count: 3;
-  -webkit-animation: popChess 0.5s;
-  -webkit-animation-delay: 0.2s;
-  -webkit-animation-iteration-count: 3;
+  animation: popChess 0.4s;
+  -webkit-animation: popChess 0.4s;
 }
-
 @keyframes popChess
 {
-0%   {background: #ffa3a3;}
-80%  {background: #cfcfff;}
-100% {background: #ffa3a3;}
+from   {-webkit-transform: rotateY(90deg);transform: rotateY(90deg);}
+to     {-webkit-transform: rotateY(0deg);transform: rotateY(0deg);}
 }
 @-webkit-keyframes popChess
 {
-0%   {background: #ffa3a3;}
-80%  {background: #cfcfff;}
-100% {background: #ffa3a3;}
+from   {-webkit-transform: rotateY(90deg);}
+to     {-webkit-transform: rotateY(0deg);}
 }
 
 .hint {

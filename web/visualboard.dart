@@ -207,8 +207,9 @@ class VisualBoard extends Board {
     if (this[pos] == null) {
       _cell(pos).nodes.add( new Element.html('<div class="${color == BLACK? "b": "w"}c"></div>'));
       _cell(pos).classes.remove('can_set');
-      _cell(pos).classes.add('lastest');
-      //new Timer(const Duration(seconds: 1), () {_removeLastest(pos.x, pos.y);});
+      DivElement chess = _cell(pos).nodes[0];
+      chess.classes.add('lastest');
+      new Timer(const Duration(seconds: 3), () {_removeLastest(chess, "lastest");});
     } else if (color == BLACK){
       DivElement chess = _cell(pos).nodes[0];
       chess.classes.add('bc');
@@ -220,8 +221,8 @@ class VisualBoard extends Board {
     }
     super._placeOne(pos, color);
   }
-  void _removeLastest(int i, int j){
-    _cells[i][j].classes.remove('lastest');
+  void _removeLastest(DivElement div, String s){
+    div.classes.remove('$s');
   }
   void _choosePlayer(){
     DivElement p1 = query('#oneplayer');
