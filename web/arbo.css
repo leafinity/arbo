@@ -2,7 +2,7 @@ body {
   width: 100%;
   background-color: white;
 }
-.chessboard, .chessboard div, header , .grade_b, .grade_w , .score_b , .score_w {
+.chessboard, .chessboard div, header , .grade_b, .grade_w , .score_b , .score_w, .levelDisplay {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -49,8 +49,22 @@ header {
   background-color: #ffa3a3;
 }
 
+.levelDisplay{
+  top: 150px;
+  left: 950px;
+  width: 250px;
+  height: 40px;
+  padding-left: 25px;
+  border-radius: 10px; 
+  background-color: white;
+  color: #f55c75;
+  font-family: "Kozuka Gothic Pro EL", sans-serif;
+  font-size: 30px;
+  text-align: left;
+}
+
 .grade_b, .grade_w {
-  top: 170px;
+  top: 220px;
   left: 950px;
   width: 123px;
   height: 55px;
@@ -64,11 +78,11 @@ header {
 
 }
 .grade_w {
-  top: 255px;
+  top: 290px;
 }
 
 .score_b , .score_w {
-  top: 170px;
+  top: 220px;
   left: 1078px;
   width: 120px;
   height: 55px;
@@ -83,7 +97,7 @@ header {
 
 }
 .score_w {
-  top: 255px;
+  top: 290px;
 }
 
 .grade_b > div, .grade_w > div {
