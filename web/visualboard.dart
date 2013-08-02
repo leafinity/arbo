@@ -262,17 +262,17 @@ class VisualBoard extends Board {
     DivElement d = query('#levelDisplay');
     l1.onClick.listen(( MouseEvent evt){
       _level = HARD;
-      d.innerHtml = 'Level:&nbsp &nbsp &nbsp &nbsp &nbspHard';
+      d.innerHtml = 'Level:&nbsp &nbsp &nbsp &nbsp &nbspEasy';
       _disChooseBoxL();
     });
     l2.onClick.listen(( MouseEvent evt){
       _level = MEDIUM;
-      d.innerHtml = 'Level:&nbsp&nbspMedium';
+      d.innerHtml = 'Level:&nbsp &nbsp &nbsp &nbsp &nbsp&nbspSilly';
       _disChooseBoxL();
     });
     l3.onClick.listen(( MouseEvent evt){
       _level = EASY;
-      d.innerHtml = 'Level:&nbsp &nbsp &nbsp &nbsp &nbspEasy';
+      d.innerHtml = 'Level:&nbsp &nbsp &nbsp &nbspIdiotic';
       _disChooseBoxL();
     });
   }

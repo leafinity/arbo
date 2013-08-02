@@ -3801,15 +3801,15 @@ z.gCl().KF("Black first")
 $.Qy($.tP("#levelDisplay"),"Level:&nbsp&nbsp-&nbsp-&nbsp-&nbsp-&nbsp-&nbsp-&nbsp-")}},UZ:{"":"Tp;a,b",
 call$1:function(a){var z=this.a
 z.sEE(z.gMi())
-$.Qy(this.b,"Level:&nbsp &nbsp &nbsp &nbsp &nbspHard")
+$.Qy(this.b,"Level:&nbsp &nbsp &nbsp &nbsp &nbspEasy")
 z.qv()}},k2:{"":"Tp;c,d",
 call$1:function(a){var z=this.c
 z.sEE(z.gIL())
-$.Qy(this.d,"Level:&nbsp&nbspMedium")
+$.Qy(this.d,"Level:&nbsp &nbsp &nbsp &nbsp &nbsp&nbspSilly")
 z.qv()}},Mh:{"":"Tp;e,f",
 call$1:function(a){var z=this.e
 z.sEE(z.gwu())
-$.Qy(this.f,"Level:&nbsp &nbsp &nbsp &nbsp &nbspEasy")
+$.Qy(this.f,"Level:&nbsp &nbsp &nbsp &nbspIdiotic")
 z.qv()}},T4:{"":"Tp;",
 call$1:function(a){$.LE($.ol.gyH($.lq()))}},R8:function(a,b){return new $.B1(a,b)},Zo:function(a){var z=new $.uR(null)
 z.Yh(a)
