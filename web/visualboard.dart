@@ -231,6 +231,8 @@ class VisualBoard extends Board {
       _player = HUMAN;
       _disChooseBoxP();
       _dialog.write('Black first');
+      DivElement d = query('#levelDisplay');
+      d.innerHtml = 'Level:&nbsp&nbsp-&nbsp-&nbsp-&nbsp-&nbsp-&nbsp-&nbsp-';
     });
   }
   void _disChooseBoxP(){
@@ -257,7 +259,7 @@ class VisualBoard extends Board {
     DivElement l1 = query('#hard');
     DivElement l2 = query('#medium');
     DivElement l3 = query('#easy');
-      DivElement d = query('#levelDisplay');
+    DivElement d = query('#levelDisplay');
     l1.onClick.listen(( MouseEvent evt){
       _level = HARD;
       d.innerHtml = 'Level:&nbsp &nbsp &nbsp &nbsp &nbspHard';
