@@ -73,7 +73,7 @@ class ComputerPlayer {
   Offset nextMove(Board board, int level){
     _d1 = new DateTime.now();
     int levelNext = level - 1;
-    int highScore = -10000;
+    int highScore = -100000000;
     Offset pos;
     for(int i = 0; i < 8 ; i++){
       for(int j = 0; j < 8 ; j++){
@@ -81,8 +81,8 @@ class ComputerPlayer {
         if (tempBoard.canPlace(new Offset(i, j), WHITE)){
           tempBoard.placeChess(new Offset(i, j), WHITE);
           int score = getHighScore(tempBoard, BLACK, levelNext);
-          print("$i,$j = $score");
-          if (highScore <= score ){
+          //print("$i,$j = $score");
+          if (highScore < score ){
             highScore = score;
             pos = new Offset(i, j);
           }
@@ -99,7 +99,8 @@ class ComputerPlayer {
       return countscore(board);
     }
     int levelNext = level - 1;
-    int highScore = -10000;
+    int highScore = -100000000;
+    if (color == BLACK) highScore = -highScore;
     for(int i = 0; i < 8 ; i++){
       for(int j = 0; j < 8 ; j++){
         Offset pos = new Offset(i, j);
@@ -108,12 +109,16 @@ class ComputerPlayer {
           tempBoard.placeChess(pos, color);
           Color another = color == BLACK? WHITE: BLACK;
           int score = getHighScore(tempBoard, another, levelNext);
-          if(color == BLACK && tempBoard.aboveConer(i, j))
-            score += 500;          
-          else if(color == WHITE && tempBoard.aboveConer(i, j))
-            score -= 500;
-          if (score >= highScore){
-            highScore = score;
+          if (color == BLACK) {
+            if(tempBoard.aboveConer(i, j))
+              score += 500;          
+            if (score < highScore)
+              highScore = score;
+          } else {
+            if (tempBoard.aboveConer(i, j))
+              score -= 500;
+            if (score > highScore)
+              highScore = score;
           }
         }
       }//j
