@@ -3384,45 +3384,47 @@ wk:function(a,b){var z,y,x,w,v,u,t
 $.A3=$.SB()
 if(b==null)throw b.W()
 z=b-1
-for(y=-100000000,x=null,w=0;w<8;++w)for(v=0;v<8;++v){u=$.Zo(a)
+for(y=null,x=null,w=0;w<8;++w)for(v=0;v<8;++v){u=$.Zo(a)
 if(u.zh(new $.B1(w,v),$.t9)){u.yM(new $.B1(w,v),$.t9)
 t=this.Jt(u,$.U5,z)
-if($.u6(y,t)){x=new $.B1(w,v)
+if(y==null||$.u6(y,t)){x=new $.B1(w,v)
 y=t}}}$.bK=$.SB()
 return x},
-Jt:function(a,b,c){var z,y,x,w,v,u,t,s
+Jt:function(a,b,c){var z,y,x,w,v,u,t,s,r
 if(typeof c!=="number")return this.Qq(1,a,b,c)
 if(c===0||a.lk())return this.Ho(a)
 z=c-1
-y=b===$.U5
-x=y?100000000:-100000000
-for(w=0;w<8;++w)for(v=0;v<8;++v){u=new $.B1(w,v)
+for(y=b===$.U5,x=null,w=0;w<8;++w)for(v=0;v<8;++v){u=new $.B1(w,v)
 t=$.Zo(a)
 if(t.zh(u,b)){t.yM(u,b)
 s=this.Jt(t,y?$.t9:$.U5,z)
-if(typeof s!=="number")return this.Qq(2,a,b,0,s,y,t,x,z,v,w)
+if(typeof s!=="number")return this.Qq(2,a,b,0,x,v,w,s,t,y,z)
 if(y){if(t.a5(w,v))s+=500
-if(s<x)x=s}else{if(t.a5(w,v))s-=500
-if(s>x)x=s}}}return x},
+if(x!=null){if(x==null)throw $.s(x)
+r=s<x}else r=!0
+if(r)x=s}else{if(t.a5(w,v))s-=500
+if(x!=null){if(x==null)throw $.s(x)
+r=s>x}else r=!0
+if(r)x=s}}}return x!=null?x:0},
 Qq:function(a,b,c,d,e,f,g,h,i,j,k){switch(a){case 0:case 1:a=0
-f=$.x(d)
-if(f.n(d,0)||b.lk())return this.Ho(b)
-i=f.W(d,1)
-f=c===$.U5
-h=f?100000000:-100000000
-k=0
+j=$.x(d)
+if(j.n(d,0)||b.lk())return this.Ho(b)
+k=j.W(d,1)
+j=c===$.U5
+e=null
+g=0
 case 2:var z
-L0:while(!0)switch(a){case 0:if(!(k<8))break L0
-j=0
-case 2:L1:while(!0)switch(a){case 0:if(!(j<8))break L1
-z=new $.B1(k,j)
-g=$.Zo(b)
-case 2:if(a===2||a===0&&g.zh(z,c))switch(a){case 0:g.yM(z,c)
-e=this.Jt(g,f?$.t9:$.U5,i)
+L0:while(!0)switch(a){case 0:if(!(g<8))break L0
+f=0
+case 2:L1:while(!0)switch(a){case 0:if(!(f<8))break L1
+z=new $.B1(g,f)
+i=$.Zo(b)
+case 2:if(a===2||a===0&&i.zh(z,c))switch(a){case 0:i.yM(z,c)
+h=this.Jt(i,j?$.t9:$.U5,k)
 case 2:a=0
-if(f){if(g.a5(k,j))e=$.WB(e,500)
-if($.u6(e,h))h=e}else{if(g.a5(k,j))e=$.xH(e,500)
-if($.xZ(e,h))h=e}}++j}++k}return h}},
+if(j){if(i.a5(g,f))h=$.WB(h,500)
+if(e==null||$.u6(h,e))e=h}else{if(i.a5(g,f))h=$.xH(h,500)
+if(e==null||$.xZ(h,e))e=h}}++f}++g}return e!=null?e:0}},
 Ho:function(a){var z,y,x,w,v
 for(z=0,y=0;y<8;++y)for(x=0;x<8;++x){w=a.zl
 if(y>=w.length)throw $.e(y)
@@ -3988,7 +3990,7 @@ I.$lazy($,"_toStringList","Pl","lD",function(){return $.A(null)})
 I.$lazy($,"_toStringList","yu","tw",function(){return $.A(null)})
 I.$lazy($,"_START_TAG_REGEXP","l2","kA",function(){return $.nu("<(\\w+)",!0,!1)})
 I.$lazy($,"_allOfs","FI","Sc",function(){return[$.R8(-1,0),$.R8(-1,1),$.R8(0,1),$.R8(1,1),$.R8(1,0),$.R8(1,-1),$.R8(0,-1),$.R8(-1,-1)]})
-I.$lazy($,"_scores","yC","iG",function(){return[[900,-20,20,30,30,20,-20,900],[-20,-50,20,30,30,20,-50,-20],[20,20,40,20,20,40,20,20],[30,30,20,20,20,20,30,30],[30,30,20,20,20,20,30,30],[20,20,40,20,20,40,20,20],[-20,-50,20,30,30,20,-50,-20],[900,-20,20,30,30,20,-20,900]]})
+I.$lazy($,"_scores","yC","iG",function(){return[[900,-10,90,50,50,90,-10,900],[-10,-250,10,20,20,10,-250,-10],[90,10,50,30,30,50,10,90],[50,20,30,20,20,30,20,50],[50,20,30,20,20,30,20,50],[90,10,50,30,30,50,10,90],[-10,-250,10,20,20,10,-250,-10],[900,-10,90,50,50,90,-10,900]]})
 $.MT("HTMLElement",$.cw)
 $.VQ("HTMLAnchorElement",$.Gh)
 $.VQ("WebKitAnimationEvent",$.rK)
