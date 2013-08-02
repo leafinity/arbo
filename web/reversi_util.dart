@@ -52,7 +52,7 @@ class Dialog {
     }
     if (_player == COMPUTER) {
       if(color == BLACK) 
-        _memo.innerHtml = 'You are so barbaric <img src = "../static/cry.gif" alt = "cry"></img>  Play again! Play again!';
+        _memo.innerHtml = 'You are so barbaric <img src = "static/cry.gif" alt = "cry"></img>  Play again! Play again!';
       else if(color == WHITE)
         write('HA!HA!HA! I WIN. Go to pratice more');
     }
@@ -71,6 +71,7 @@ class Dialog {
 
 class ComputerPlayer {
   Offset nextMove(Board board, int level){
+    _d1 = new DateTime.now();
     int levelNext = level - 1;
     int highScore = -10000;
     Offset pos;
@@ -88,6 +89,8 @@ class ComputerPlayer {
         }
       }
     }
+
+    _d2 = new DateTime.now();
     return pos;
   } 
   

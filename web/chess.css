@@ -38,8 +38,8 @@
 }
 
 .lastest {
-  animation: popChess 0.4s;
-  -webkit-animation: popChess 0.4s;
+  animation: popChess 0.6s;
+  -webkit-animation: popChess 0.6s;
 }
 @keyframes popChess
 {

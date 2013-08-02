@@ -3,7 +3,7 @@ part of reversi;
 int _player;
 int COMPUTER = 0, HUMAN = 1;
 int _times = 0; 
-
+DateTime _d1, _d2;
 ///The visual-able board shown on the screen.
 class VisualBoard extends Board {
   final Element _parent;
@@ -15,7 +15,7 @@ class VisualBoard extends Board {
   ComputerPlayer _computer = new ComputerPlayer();
   bool _computing = false;
   int _level;
-  int EASY = 1, MEDIUM = 2, HARD = 4;
+  int EASY = 1, MEDIUM = 2, HARD = 5;
 
   VisualBoard(this._parent, this._dialog, this._scoreboard, this._alert) {
     _initElements();
@@ -114,12 +114,7 @@ class VisualBoard extends Board {
       if (nextColor == WHITE){
         _computing = true;
         _computer.computerwrite(_dialog, WHITE, _scoreboard._blackscore, _scoreboard._whitescore);
-        if (_level == EASY)
-          new Timer(const Duration(milliseconds: 2500), _computerPlace);
-        if (_level == MEDIUM)
-          new Timer(const Duration(milliseconds: 1500), _computerPlace);
-        else
-          new Timer(const Duration(milliseconds: 50), _computerPlace);
+        new Timer(const Duration(milliseconds: 800), _computerPlace);
       }
       else if(nextColor == null){
         _endGame();
@@ -132,25 +127,24 @@ class VisualBoard extends Board {
     }//if (canPlace(pos, BLACK))
   }
   void _computerPlace(){
-    placeChess(_computer.nextMove(this, _level), WHITE);
-    Color nextColor = _updateScore(WHITE);
-    if (nextColor != WHITE) {
-      _computing = false;
-      if (nextColor == null){
-        _endGame();        
+    Offset oft = _computer.nextMove(this, _level);
+    Duration du1 = _d2.difference(_d1);
+    Duration du2 = new Duration(milliseconds: 1400);
+    new Timer(du1-du2, (){
+      placeChess(oft, WHITE);
+      Color nextColor = _updateScore(WHITE);
+      if (nextColor != WHITE) {
+        _computing = false;
+        if (nextColor == null){
+          _endGame();        
+          return;
+        }
+        _computer.computerwrite(_dialog, BLACK, _scoreboard._blackscore, _scoreboard._whitescore);
         return;
       }
-      _computer.computerwrite(_dialog, BLACK, _scoreboard._blackscore, _scoreboard._whitescore);
-      return;
-    }
-    _alert.alertPop(WHITE);
-    _dialog.write("Haha~ It's my turn again B-)");
-    if (_level == EASY)
-      new Timer(const Duration(milliseconds: 2200), _computerPlace);      
-    if (_level == MEDIUM)
-      new Timer(const Duration(milliseconds: 1500), _computerPlace);
-    else
-      _computerPlace();
+      _alert.alertPop(WHITE);
+      _dialog.write("Haha~ It's my turn again B-)");
+      new Timer(const Duration(milliseconds: 800), _computerPlace);});
   }
 
   Color _updateScore(Color currentColor) { //cpt : white
