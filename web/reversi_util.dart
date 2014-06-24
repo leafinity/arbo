@@ -247,3 +247,7 @@ final List<List<int>> _scores = [
   [-10,-250, 10, 20, 20, 10,-250,-10],
   [900, -10, 90, 50, 50, 90, -10,900],
 ];
+
+String px(int num) {
+  return num.toString() + 'px';
+}

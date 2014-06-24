@@ -9,8 +9,8 @@ const int DOWN = 4, DOWN_LEFT = 5, LEFT = 6, UP_LEFT = 7;
 //Board chessboard;
 
 void main() {
-  VisualBoard vb = new VisualBoard (query('#chessboard'),
-    new Dialog(query('#memo')),
-    new ScoreBoard(query('#score_b'), query('#score_w')),
-    new Alert(query('#alert')));
+  VisualBoard vb = new VisualBoard (querySelector('#chessboard'),
+    new Dialog(querySelector('#memo')),
+    new ScoreBoard(querySelector('#score_b'), querySelector('#score_w')),
+    new Alert(querySelector('#alert')));
 }

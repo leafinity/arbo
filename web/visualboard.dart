@@ -32,9 +32,15 @@ class VisualBoard extends Board {
       for (int j = 0; j < 8; j++) {
         String horz = j == 0? "boardtop" : "";
         int top = j == 0? 0: ((j-1) * 70 + 71);
-        _parent.nodes.add(
-          _cells[i][j] = new Element.html('<div class = "ch_child $horz $ver" style = "left : ${left}px; top : ${top}px;"></div>'));
-      }
+        _parent.nodes.add(_cells[i][j] = new DivElement());
+          _cells[i][j].style.left = px(left);
+          _cells[i][j].style.top = px(top);
+          if(j == 0)
+            _cells[i][j].classes.add('boardtop');
+          if(i == 0)
+            _cells[i][j].classes.add('boardleft');
+          _cells[i][j].classes.add('');
+       }
     }
     _placeOne(new Offset(3, 3), BLACK);
     _placeOne(new Offset(4, 4), BLACK);
@@ -47,7 +53,7 @@ class VisualBoard extends Board {
     _cells[i][j].classes.remove("hint");
   }
   void _initEvents(){
-    _hint = query('#hint');
+    _hint = querySelector('#hint');
     if(_hint ==  null)
       print("where is hint?");
     _hint.onClick.listen(( MouseEvent evt){ 
@@ -219,8 +225,8 @@ class VisualBoard extends Board {
     div.classes.remove('$s');
   }
   void _choosePlayer(){
-    DivElement p1 = query('#oneplayer');
-    DivElement p2 = query('#twoplayer');
+    DivElement p1 = querySelector('#oneplayer');
+    DivElement p2 = querySelector('#twoplayer');
     p1.onClick.listen(( MouseEvent evt){
       _player = COMPUTER;
       _disChooseBoxP();
@@ -231,35 +237,35 @@ class VisualBoard extends Board {
       _player = HUMAN;
       _disChooseBoxP();
       _dialog.write('Black first');
-      DivElement d = query('#levelDisplay');
+      DivElement d = querySelector('#levelDisplay');
       d.innerHtml = 'Level:&nbsp&nbsp-&nbsp-&nbsp-&nbsp-&nbsp-&nbsp-&nbsp-';
     });
   }
   void _disChooseBoxP(){
-    DivElement p1 = query('#oneplayer');
-    DivElement p2 = query('#twoplayer');    
+    DivElement p1 = querySelector('#oneplayer');
+    DivElement p2 = querySelector('#twoplayer');    
     p1.classes.add('disappear');
     p2.classes.add('disappear');
-    DivElement dis = query('.playerchoice');
+    DivElement dis = querySelector('.playerchoice');
     dis.classes.add('disappear');
-    dis = query('.playerchoice1');
+    dis = querySelector('.playerchoice1');
     dis.classes.add('disappear');
-    dis = query('.playerchoice2');
+    dis = querySelector('.playerchoice2');
     dis.classes.add('disappear');
     if (_player == COMPUTER) {
-      dis = query('.level');
+      dis = querySelector('.level');
       dis.classes.remove('disappear');
     }
     else{
-      dis = query('#bigShield');
+      dis = querySelector('#bigShield');
       dis.classes.add('disappear');
     }
   }
   void _chooseLevel(){
-    DivElement l1 = query('#hard');
-    DivElement l2 = query('#medium');
-    DivElement l3 = query('#easy');
-    DivElement d = query('#levelDisplay');
+    DivElement l1 = querySelector('#hard');
+    DivElement l2 = querySelector('#medium');
+    DivElement l3 = querySelector('#easy');
+    DivElement d = querySelector('#levelDisplay');
     l1.onClick.listen(( MouseEvent evt){
       _level = HARD;
       d.innerHtml = 'Level:&nbsp &nbsp &nbsp &nbsp &nbspEasy';
@@ -277,21 +283,21 @@ class VisualBoard extends Board {
     });
   }
   void _disChooseBoxL(){
-    DivElement l1 = query('#hard');
-    DivElement l2 = query('#medium');
-    DivElement l3 = query('#easy');   
+    DivElement l1 = querySelector('#hard');
+    DivElement l2 = querySelector('#medium');
+    DivElement l3 = querySelector('#easy');   
     l1.classes.add('disappear');   
     l2.classes.add('disappear');   
     l3.classes.add('disappear');
-    DivElement dis = query('#bigShield');
+    DivElement dis = querySelector('#bigShield');
     dis.classes.add('disappear');
-    dis = query('.level');
+    dis = querySelector('.level');
     dis.classes.add('disappear');
-    dis = query('.level1');
+    dis = querySelector('.level1');
     dis.classes.add('disappear');
-    dis = query('.level2');
+    dis = querySelector('.level2');
     dis.classes.add('disappear');    
-    dis = query('.level3');
+    dis = querySelector('.level3');
     dis.classes.add('disappear');
   }
 
@@ -303,7 +309,7 @@ class VisualBoard extends Board {
       _dialog.write("Duce. Let's play again");
     else
       _dialog.writeWinner(WHITE);
-    ButtonElement restart = query('#restart');
+    ButtonElement restart = querySelector('#restart');
     restart.classes.add('restart');
     restart.onClick.listen((MouseEvent evt){
       window.location.reload();
