@@ -1,3 +1,3 @@
 #Arbo
 
-Yet another Reservi game
+Yet another Reservi game (dart)
